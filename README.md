@@ -1,28 +1,35 @@
-#### Kill Last user session for logined to multiple Browsers
+## Logging in from another browser will kill any previous sessions
 
+
+### 1.Installation 
 Added to Gem to [Gemfile](Gemfile)
 ```
 gem 'devise'
 gem 'devise-security'
 ```
-- Run Bundle Install
 
-- Then, install devise
+Run Bundle Install
+```
+bundle install
+```
+
+
+Then, install devise
 ```
 rails g devise:install
 ```
 
-- Then, Create Model,
+Then, Create Model,
 ```
 rails g devise model-name
 ```
 
-- Then, Create migration
+Then, Create migration
 ```
 rails g migration add_session_limitable_to_users unique_session_id
 ```
 
-- hen, Edit the migration file
+Then, Edit the migration file
 ```
 class AddSessionLimitableToUsers < ActiveRecord::Migration[6.0]
   def change
@@ -31,12 +38,13 @@ class AddSessionLimitableToUsers < ActiveRecord::Migration[6.0]
 end
 ```
 
-- Then Create DB & Migrate
+Then Create DB & Migrate
 ```
 rails db:create db:migrate
 ```
 
-Then, Add to your ```:session_limitable``` [user model](user.rb)
+### 2.Configuration
+Then, Add to your code to user ```:session_limitable``` [user](user.rb)
 ```
 class User < ApplicationRecord
   devise :database_authenticatable,
